@@ -1,0 +1,31 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Employee Detail{% endblock %}
+
+{% block content %}
+    <h2>{{ employee.employee_name }}</h2>
+    <p>Company: {{ employee.company.company_name }}</p>
+    <p>Department: {{ employee.department.department_name }}</p>
+    <p>Email: {{ employee.email_address }}</p>
+    <p>Mobile: {{ employee.mobile_number }}</p>
+    <p>Address: {{ employee.address }}</p>
+    <p>Designation: {{ employee.designation }}</p>
+    <p>Hired On: {{ employee.hired_on }}</p>
+    <p>Projects: </p>
+    <ul>
+        {% for project in employee.project_set.all %}
+            <li>
+                <a href="{% url 'project_detail' project.id %}">{{ project.project_name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <p>Reviews: </p>
+    <ul>
+        {% for review in employee.review_set.all %}
+            <li>
+                <a href="{% url 'review_detail' review.id %}">Review {{ review.id }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'review_create' employee.id %}">Create Review</a>
+{% endblock %}

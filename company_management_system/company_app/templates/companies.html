@@ -1,0 +1,14 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Companies{% endblock %}
+
+{% block content %}
+    <h2>Companies</h2>
+    <ul>
+        {% for company in companies %}
+            <li>
+                <a href="{% url 'company_detail' company.id %}">{{ company.company_name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

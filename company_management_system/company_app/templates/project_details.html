@@ -1,0 +1,20 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Project Detail{% endblock %}
+
+{% block content %}
+    <h2>{{ project.project_name }}</h2>
+    <p>Company: {{ project.company.company_name }}</p>
+    <p>Department: {{ project.department.department_name }}</p>
+    <p>Description: {{ project.description }}</p>
+    <p>Start Date: {{ project.start_date }}</p>
+    <p>End Date: {{ project.end_date }}</p>
+    <p>Assigned Employees: </p>
+    <ul>
+        {% for employee in project.assigned_employees.all %}
+            <li>
+                <a href="{% url 'employee_detail' employee.id %}">{{ employee.employee_name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

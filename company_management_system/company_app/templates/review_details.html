@@ -1,0 +1,23 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Review Detail{% endblock %}
+
+{% block content %}
+    <h2>Review {{ review.id }}</h2>
+    <p>Status: {{ review.get_status_display }}</p>
+    <p>Feedback: {{ review.feedback }}</p>
+    <p>Review Date: {{ review.review_date }}</p>
+    <p>Employee: {{ review.content_object.employee_name }}</p>
+    {% if review.status == 'pending' %}
+        <a href="{% url 'review_schedule' review.id %}">Schedule Review</a>
+    {% elif review.status == 'scheduled' %}
+        <a href="{% url 'review_provide_feedback' review.id %}">Provide Feedback</a>
+    {% elif review.status == 'feedback_provided' %}
+        <a href="{% url 'review_submit_for_approval' review.id %}">Submit for Approval</a>
+    {% elif review.status == 'under_approval' %}
+        <a href="{% url 'review_approve' review.id %}">Approve</a>
+        <a href="{% url 'review_reject' review.id %}">Reject</a>
+    {% elif review.status == 'rejected' %}
+        <a href="{% url 'review_update_feedback' review.id %}">Update Feedback</a>
+    {% endif %}
+{% endblock %}

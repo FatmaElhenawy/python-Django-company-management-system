@@ -1,0 +1,14 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Reviews{% endblock %}
+
+{% block content %}
+    <h2>Reviews</h2>
+    <ul>
+        {% for review in reviews %}
+            <li>
+                <a href="{% url 'review_detail' review.id %}">Review {{ review.id }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
